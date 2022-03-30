@@ -1,0 +1,35 @@
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require(/* connection when established */);
+// Topic model to be created
+class Topic extends Model {}
+
+// create fields/columns for Post model
+Topic.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    user_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'user',
+        key: 'id'
+      }
+    }
+  },
+  {
+    sequelize,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'topic'
+  }
+);
+
+module.exports = Topic;
