@@ -1,72 +1,52 @@
 const router = require('express').Router();
-const { exclude } = require('inquirer/lib/objects/separator');
-const sequelize = require('../../config/connection');
-const { Topic, User, Vote, Comment } = require('../../models');
+const { User, Topic, Vote, Comment } = require('../../models');
 
-// GET all topics
+// GET all users
 router.get('/', (req, res) => {
     User.findAll({
-        attributes: { exclude: ['password'] },
-        include: [
-            {
-                model: Comment,
-                attributes: [
-                    'id', 
-                    'comment_text', 
-                    'topic_id', 
-                    'user_id', 
-                    'created_at'
-                ],
-                include: {
-                    model: User,
-                    attributes: ['username']
-                }
-            }
-        ]
+        attributes: { exclude: ['password'] }
     })
-    .then(dbUserData => res.json(dbData))
+    .then(dbUserData => res.json(dbUserData))
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
     });
 });
 
-// GET a topic
+// GET a user
 router.get('/:id', (req, res) => {
-    Topic.findOne({
+    User.findOne({
+        attributes: { exclude: ['password'] },
         where: {
             id: req.params.id
         },
-        attributes: [
-            'id',
-            'title',
-            'user_id',
-            'created_at',
-            [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE topic.id = vote.topic_id)'), 'likes']
-        ],
         include: [
-            {
-                model: Comment, 
-                attributes: [
-                    'id',
-                    'comment_text',
-                    'post_id',
-                    'user_id',
-                    'created_at'
-                ],
-                include: {
-                    model: User,
-                    attributes: ['username']
-                }
-            }
+           {
+               model: Topic,
+               attributes: ['id', 'title', 'created_at']
+           },
+           {
+               model: Comment,
+               attributes: ['id', 'comment_text', 'created_at'],
+               include: {
+                   model: Topic,
+                   attributes: ['title']
+               }
+           },
+           {
+               model: Topic, 
+               attributes: ['title'],
+               through: Vote,
+               as: 'liked_topics'
+           }
         ]
     })
-    .then(dbTopicData => {
-        if (!dbTopicData) {
-            res.status(404).json({ message: 'No topic found with this id' });
+    .then(dbUserData => {
+        if (!dbUserData) {
+            res.status(404).json({ message: 'No user found with this id' });
             return;
         }
-        res.json(dbTopicData);
+        res.json(dbUserData);
     })
     .catch(err => {
         console.log(err);
@@ -74,37 +54,54 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// CREATE a topic
+// CREATE a user
 router.post('/', (req, res) => {
-    Topic.create({
-        title: req.body.title,
-        user_id: req.body.user_id
+    User.create({
+        username: req.body.username,
+        password: req.body.password
     })
-    .then(dbTopicData => res.json(dbTopicData))
+    .then(dbUserData => res.json(dbUserData))
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
+    });
+});
+
+router.post('/login', (req, res) => {
+    User.findOne({
+        where: {
+            username: req.body.username
+        }
+    }).then(dbUserData => {
+        if (!dbUserData) {
+            res.status(400).json({ message: 'No user with that username!' });
+            return;
+        }
+        const validPassword = dbUserData.checkPassword(req.body.password)
+
+        if (!validPassword) {
+            res.status(400).json({ message: 'Incorrect password!' });
+            return;
+        }
+
+        res.json({ user: dbUserData, message: 'You are now logged in!' });
     });
 });
 
 // UPDATE topic by id
 router.put('/:id', (req, res) => {
-    Topic.update(
-        {
-            title: req.body.title
-        },
-        {
-            where: {
-                id: req.params.id
-            }
+    User.update(req.body, {
+        individualHooks: true,
+        where: {
+            id: req.params.id
         }
-    )
-    .then(dbTopicData => {
-        if (!dbTopicData) {
-            res.status(404).json({ message: 'No topic found with this id' });
+    })
+    .then(dbUserData => {
+        if (!dbUserData) {
+            res.status(404).json({ message: 'No user found with this id' });
             return;
         }
-        res.json(dbTopicData)
+        res.json(dbUserData)
     })
     .catch(err => {
         console.log(err);
@@ -114,17 +111,17 @@ router.put('/:id', (req, res) => {
 
 // DELETE topic
 router.delete('/:id', (req, res) => {
-    Topic.destroy({
+    User.destroy({
         where: {
             id: req.params.id
         }
     })
-    .then(dbTopicData => {
-        if (!dbTopicData) {
-            res.status(404).json({ message: 'No topic found with this id' });
+    .then(dbUserData => {
+        if (!dbUserData) {
+            res.status(404).json({ message: 'No user found with this id' });
             return;
         }
-        res.json(dbTopicData)
+        res.json(dbUserData)
     })
     .catch(err => {
         console.log(err);
