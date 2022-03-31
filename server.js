@@ -1,4 +1,4 @@
-// set handlebars as a template engine
+// set necessary connections
 const exphbs = require('express-handlebars');
 const hbs = exphbs.create({});
 const path = require('path');

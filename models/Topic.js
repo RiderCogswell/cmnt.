@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require(/* connection when established */);
+const sequelize = require('../config/connection');
 // Topic model to be created
 class Topic extends Model {}
 
