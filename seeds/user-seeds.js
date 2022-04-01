@@ -1,4 +1,4 @@
-const sequelize = require(/* connection when established */);
+const sequelize = require('../config/connection');
 const { User, Topic } = require('../models');
 
 const userdata = [
