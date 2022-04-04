@@ -1,0 +1,36 @@
+<h1>cmnt.</h1>
+
+<div class="topic-wrapper">
+    <h3>What do you think about space travel?</h3>
+</div>
+
+<div class="topic-byline">
+    Last updated March 30, 2022
+</div>
+
+<div class="social-info">
+    11,234 likes
+</div>
+
+<div class="textarea-wrapper">
+    <textarea>           
+    </textarea>
+</div>
+
+<button class="mt10 btn-primary">Comment</button>
+
+{{#if topics}}
+    {{!-- {{posts.length}} {{format_plural "post" posts.length}} --}}
+    
+    <ul class="blog-list">
+    {{#each topics as | topic |}}
+    <li>
+        hello
+        {{!-- {{> post-info post }} --}}
+    </li>
+    {{/each}}
+    </ul>
+
+{{else}}
+    <p>There are no posts yet!</p>
+{{/if}}

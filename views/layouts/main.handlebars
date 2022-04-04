@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cmnt.</title>
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/dashboard">Dashboard</a>
+      {{#if loggedIn}}
+      <a id="logout" href="javascript:void(0);">Logout</a>
+      {{!-- <button id="logout" class="btn-no-style">Logout</button> --}}
+      {{else}}
+      <!-- Otherwise, show a link to login -->
+      <a href="/login">Login</a>
+      {{/if}}
+    </nav>
+  </header>
+  
+  <main>
+      {{{body}}}
+  </main>
+  
+  <!-- If the user is logged in, load the JS script for when they logout -->
+  {{#if loggedIn}}
+  <script src="/js/logout.js"></script>
+  {{/if}}
+</body>
+
+</html>

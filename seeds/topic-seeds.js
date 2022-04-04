@@ -2,7 +2,7 @@ const { Topic } = require('../models');
 
 const topicdata = [
   {
-    title: 'What is your favoirte color?',
+    title: 'What is your favorite color?',
     user_id: 17
   },
   {
