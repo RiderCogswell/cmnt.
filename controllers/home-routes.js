@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
+const withAuth = require('../utils/auth');
 const { Topic, User, Comment, Vote } = require('../models');
 
 // get all posts for homepage
@@ -15,7 +16,7 @@ router.get('/', (req, res) => {
       include: [
         {
           model: Comment,
-          attributes: ['id', 'comment_text', 'topic_id', 'user_id'],
+          attributes: ['id', 'comment_text', 'topic_id', 'user_id', 'created_at'],
           include: {
             model: User,
             attributes: ['username']
@@ -29,9 +30,15 @@ router.get('/', (req, res) => {
     })
       .then(dbPostData => {
         const topics = dbPostData.map(topic => topic.get({ plain: true }));
-  
+
+        let max = topics.length;
+        let randomNumber = Math.floor(Math.random() * (max - 1 + 1)) + 1
+        
+        const topic = topics[randomNumber];
+        console.log(topic);
+
         res.render('homepage', {
-          topics
+          topic
         });
       })
       .catch(err => {
