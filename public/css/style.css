@@ -25,8 +25,10 @@ body{
 .mt20{margin-top:20px;}
 
 main{
-  max-width:1200px;
+  max-width:1000px;
   margin:0 auto;
+  padding:20px;
+  /* box-sizing: border-box; */
 }
 
 h1, h2, h3{margin:0;padding:0;}
@@ -62,35 +64,34 @@ h1{
 }
 
 .topic-wrapper{
-  margin:35px auto 0 auto;
-  max-width:1000px;
+  margin-top:35px;
+  /* max-width:1000px; */
+  width:100%;
   border-radius:10px;
   padding:25px;
   background-color:#f0ede2;
   opacity:0.8;
   box-sizing:border-box;
+  text-align:center;
+  font-size:20px;
+  font-weight:bold;
+  color:var(--primary);
+}
+
+.topic-below{
+  width:100%;
+  margin-top:10px;
+  padding-left:10px;
+  color:#5f5f5f;
+  /* font-size:14px; */
 }
 
 .topic-data{
   margin-top:15px;
 }
 
-.topic-byline{
-  max-width:1000px;
-  margin: 50px auto 0 auto;
-  font-size:14px;
-  padding: 0 10px;
-}
-
-.social-info{
-  margin-top:8px;
-  padding-left:10px;
-  color:#6b6b6b;
-  font-size:14px;
-}
-
 .textarea-wrapper{
-  margin-top:40px;
+  margin:40px auto 0 auto;
   max-width:1000px;
   overflow:none;
 }
@@ -144,7 +145,7 @@ a{text-decoration:none;}
 a:hover{text-decoration:underline;}
 
 nav{
-  max-width:1200px;
+  max-width:1000px;
   margin:0 auto;
   /* background-color:#333; */
   padding:10px 15px;
@@ -162,12 +163,6 @@ nav a:hover{
 
 nav a, nav a:visited{
   color:#333;
-}
-
-main {
-  max-width:1200px;
-  margin:0 auto;
-  padding:20px;
 }
 
 button {
