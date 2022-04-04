@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
 const { Topic, User, Vote, Comment } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // GET all topics
 router.get('/', (req, res) => {
@@ -80,7 +81,7 @@ router.get('/:id', (req, res) => {
 });
 
 // CREATE a topic
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
     Topic.create({
         title: req.body.title,
         user_id: req.body.user_id
@@ -93,7 +94,7 @@ router.post('/', (req, res) => {
 });
 
 // LIKE topic
-router.put('/upvote', (req, res) => {
+router.put('/upvote', withAuth, (req, res) => {
     Topic.upvote(req.body, { Vote })
     .then(updatedTopicData => res.json(updatedTopicData))
     .catch(err => {
@@ -103,7 +104,7 @@ router.put('/upvote', (req, res) => {
 });
 
 // UPDATE topic by id
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
     Topic.update(
         {
             title: req.body.title
@@ -128,7 +129,7 @@ router.put('/:id', (req, res) => {
 });
 
 // DELETE topic
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
     Topic.destroy({
         where: {
             id: req.params.id
