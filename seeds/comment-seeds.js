@@ -62,14 +62,12 @@ const commentdata = [
     topic_id: 4
   },
   {
-    comment_text:
-    'example',
+    comment_text: 'example',
     user_id: 4,
     topic_id: 9
   },
   {
-    comment_text:
-      'example',
+    comment_text: 'example',
     user_id: 5,
     topic_id: 14
   },
@@ -84,8 +82,7 @@ const commentdata = [
     topic_id: 2
   },
   {
-    comment_text:
-    'example',
+    comment_text: 'example',
     user_id: 2,
     topic_id: 20
   },
@@ -95,14 +92,12 @@ const commentdata = [
     topic_id: 11
   },
   {
-    comment_text:
-    'example',
+    comment_text: 'example',
     user_id: 5,
     topic_id: 13
   },
   {
-    comment_text:
-    'example',
+    comment_text: 'example',
     user_id: 9,
     topic_id: 16
   },
@@ -122,14 +117,12 @@ const commentdata = [
     topic_id: 8
   },
   {
-    comment_text:
-    'example',
+    comment_text: 'example',
     user_id: 8,
     topic_id: 10
   },
   {
-    comment_text:
-    'example',
+    comment_text: 'example',
     user_id: 1,
     topic_id: 15
   },
@@ -209,14 +202,12 @@ const commentdata = [
     topic_id: 19
   },
   {
-    comment_text:
-      'example',
+    comment_text: 'example',
     user_id: 5,
     topic_id: 4
   },
   {
-    comment_text:
-    'example',
+    comment_text: 'example',
     user_id: 2,
     topic_id: 11
   },
@@ -231,8 +222,7 @@ const commentdata = [
     topic_id: 6
   },
   {
-    comment_text:
-    'example',
+    comment_text: 'example',
     user_id: 7,
     topic_id: 9
   },
@@ -247,8 +237,7 @@ const commentdata = [
     topic_id: 1
   },
   {
-    comment_text:
-    'example',
+    comment_text: 'example',
     user_id: 2,
     topic_id: 19
   },

@@ -3,10 +3,11 @@ const seedTopics = require('./topic-seeds');
 const seedComments = require('./comment-seeds');
 const seedVotes = require('./vote-seeds');
 
-const sequelize = require(/* connection when established */);
+// set up connection to db
+const sequelize = require('../config/connection');
 
 const seedAll = async () => {
-  await sequelize.sync({ force: true });
+  await sequelize.sync({ force: false });
   console.log('--------------');
   await seedUsers();
   console.log('--------------');
