@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-router.get('/', (req, res) => {
+router.get('/', withAuth, (req, res) => {
     Comment.findAll({
         attributes: [
             // DO NOT INCLUDE ID IN HERE OR BREAKS

@@ -5,7 +5,7 @@ const withAuth = require('../../utils/auth');
 
 
 // Get a single post by ID for single-post page
-router.get('/:id', async (req, res) => {
+router.get('/:id', withAuth, async (req, res) => {
   try {
     const postData = await Post.findOne({ 
       where: {
@@ -47,7 +47,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Get a single post by ID for the edit-post page
-router.get('/edit/:id', async (req, res) => {
+router.get('/edit/:id', withAuth, async (req, res) => {
   try {
     const postData = await Post.findOne({ 
       where: {
