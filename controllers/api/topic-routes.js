@@ -4,7 +4,7 @@ const { Topic, User, Vote, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // GET all topics
-router.get('/', (req, res) => {
+router.get('/', withAuth, (req, res) => {
     Topic.findAll({
         order: [['created_at', 'DESC']],
         attributes: [
@@ -38,7 +38,7 @@ router.get('/', (req, res) => {
 });
 
 // GET a topic
-router.get('/:id', (req, res) => {
+router.get('/:id', withAuth, (req, res) => {
     Topic.findOne({
         where: {
             id: req.params.id

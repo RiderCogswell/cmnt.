@@ -3,7 +3,7 @@ const { User, Topic, Vote, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // GET all users
-router.get('/', (req, res) => {
+router.get('/', withAuth, (req, res) => {
     User.findAll({
         attributes: { exclude: ['password'] }
     })
@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 });
 
 // GET a user
-router.get('/:id', (req, res) => {
+router.get('/:id', withAuth, (req, res) => {
     User.findOne({
         attributes: { exclude: ['password'] },
         where: {
@@ -55,20 +55,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// CREATE a user
-router.post('/', withAuth, (req, res) => {
-    User.create({
-        username: req.body.username,
-        password: req.body.password
-    })
-    .then(dbUserData => res.json(dbUserData))
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    });
-});
-
-router.post('/login', withAuth, (req, res) => {
+router.post('/login', (req, res) => {
     User.findOne({
         where: {
             username: req.body.username
@@ -86,6 +73,19 @@ router.post('/login', withAuth, (req, res) => {
         }
 
         res.json({ user: dbUserData, message: 'You are now logged in!' });
+    });
+});
+
+// CREATE a user
+router.post('/signup', (req, res) => {
+    User.create({
+        username: req.body.username,
+        password: req.body.password
+    })
+    .then(dbUserData => res.json(dbUserData))
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
     });
 });
 
