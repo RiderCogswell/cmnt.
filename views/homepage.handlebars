@@ -1,7 +1,5 @@
-<h1>cmnt.</h1>
-
 <div class="topic-wrapper">
-    What do you think about space travel?
+    {{ topic.title }}
 </div>
 
 <div class="topic-below">
@@ -15,18 +13,16 @@
 
 <button class="mt10 btn-primary">Comment</button>
 
-{{#if topics}}
+{{#if topic}}
+    <p>{{ topic.comments.length}} {{format_plural "comment" topic.comments.length}}</p>
     {{!-- {{posts.length}} {{format_plural "post" posts.length}} --}}
     
-    <ul class="blog-list">
-    {{#each topics as | topic |}}
+    <ul class="comment-list">
+    {{#each topic.comments as | comment |}}
     <li>
-        hello
-        {{!-- {{> post-info post }} --}}
+        {{ comment.comment_text }}
+        <p>{{ user.username }} on {figuring out date}</p>
     </li>
     {{/each}}
     </ul>
-
-{{else}}
-    <p>There are no posts yet!</p>
 {{/if}}

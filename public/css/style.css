@@ -214,43 +214,22 @@ form label {
   border-bottom:1px solid #CCC;
 }
 
-.blog-list{
+.comment-list{
   list-style-type:none;
   margin:20px 0 0 0;
   padding:0;
 }
 
-.blog-list a{
-  color:#1f67be;
-  text-decoration:none;
-  /* font-weight:bold; */
-}
-
-.blog-list a:hover{
-  text-decoration:underline;
-}
-
-.blog-title{
-  font-weight:bold;
-}
-
-.blog-list li{
+.comment-list li{
   padding:12px 0;
-  /* margin:10px 0; */
   border-bottom:1px solid #e7e7e7;
 }
 
-.blog-edit{
-  margin:6px 0 0 0;
-}
-
-p{
+.comment-list li p{
   margin:4px 0 0 0;
   padding:0;
-}
-
-.blog-title:hover{
-  text-decoration:underline;
+  color:#333;
+  font-size:14px;
 }
 
 .wrapper {
