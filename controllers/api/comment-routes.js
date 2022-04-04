@@ -2,7 +2,8 @@ const router = require('express').Router();
 const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-Comment.findAll({
+router.get('/', (req, res) => {
+    Comment.findAll({
         attributes: [
             // DO NOT INCLUDE ID IN HERE OR BREAKS
             'comment_text',
@@ -11,11 +12,11 @@ Comment.findAll({
             'created_at'
         ],
     })
-      .then(dbCommentData => res.json(dbCommentData))
-      .catch(err => {
-          console.log(err);
-          res.status(500).json(err);
-      })
+    .then(dbCommentData => res.json(dbCommentData))
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
 });
 
 router.post('/', withAuth, (req, res) => {
