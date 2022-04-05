@@ -37,9 +37,16 @@ router.get('/', (req, res) => {
         const topic = topics[randomNumber];
         console.log(topic);
 
-        res.render('homepage', {
-          topic
-        });
+        if (!req.session.loggedIn) {
+          res.render('login', {
+          });
+        }
+        else{
+          res.render('homepage', {
+            topic
+          });
+        }
+       
       })
       .catch(err => {
         console.log(err);
