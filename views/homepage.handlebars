@@ -1,6 +1,10 @@
 <div class="topic-wrapper">
-    {{ topic.title }}
+    <i class="bi bi-arrow-left-circle-fill" title="Previous Topic"></i>
+    {{ topic.title }} 
+    <i class="bi bi-arrow-right-circle-fill" title="Next Topic"></i>
 </div>
+
+
 
 <div class="topic-below">
     <i class="bi bi-hand-thumbs-up-fill" title="I like this"></i> {{ topic.likes }} {{ format_plural "like" topic.likes }} | Posted on {{ format_date topic.created_at }}
