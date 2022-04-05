@@ -3,12 +3,11 @@
 </div>
 
 <div class="topic-below">
-    <i class="bi bi-hand-thumbs-up-fill"></i> 11,234 likes | Last Updated March 30, 2022
+    <i class="bi bi-hand-thumbs-up-fill"></i> {{ topic.likes }} {{ format_plural "like" topic.likes }} | Posted on {{ format_date topic.created_at }}
 </div>
 
 <div class="textarea-wrapper">
-    <textarea>           
-    </textarea>
+    <textarea></textarea>
 </div>
 
 <button class="mt10 btn-primary">Comment</button>
@@ -21,7 +20,7 @@
     {{#each topic.comments as | comment |}}
     <li>
         {{ comment.comment_text }}
-        <p>{{ user.username }} on {figuring out date}</p>
+        <p>{{ user.username }} on {{ format_date created_at }}</p>
     </li>
     {{/each}}
     </ul>

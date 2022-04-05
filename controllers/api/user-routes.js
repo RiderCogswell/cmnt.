@@ -56,6 +56,7 @@ router.get('/:id', withAuth, (req, res) => {
 });
 
 router.post('/login', (req, res) => {
+    alert('entering login route')
     User.findOne({
         where: {
             username: req.body.username
@@ -72,7 +73,14 @@ router.post('/login', (req, res) => {
             return;
         }
 
-        res.json({ user: dbUserData, message: 'You are now logged in!' });
+        // Once the user successfully logs in, set up the sessions variable 'loggedIn'
+        req.session.save(() => {
+            req.session.user_id = dbUserData.id;
+            req.session.username = dbUserData.username;
+            req.session.loggedIn = true;
+
+            res.status(200).json({ user: dbUserData, message: 'You are now logged in!' });
+        });
     });
 });
 
@@ -82,7 +90,16 @@ router.post('/signup', (req, res) => {
         username: req.body.username,
         password: req.body.password
     })
-    .then(dbUserData => res.json(dbUserData))
+    .then(dbUserData => {
+        // Once the user signs up, log them in
+        req.session.save(() => {
+            req.session.user_id = dbUserData.id;
+            req.session.username = dbUserData.username;
+            req.session.loggedIn = true;
+
+            res.status(200).json({ user: dbUserData, message: 'You are now logged in!' });
+        });
+    })
     .catch(err => {
         console.log(err);
         res.status(500).json(err);

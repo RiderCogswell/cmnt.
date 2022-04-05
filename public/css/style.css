@@ -22,6 +22,7 @@ body{
 }
 
 .mt10{margin-top:10px;}
+.mt15{margin-top:15px;}
 .mt20{margin-top:20px;}
 
 main{
@@ -40,6 +41,13 @@ h1{
   color: var(--primary);
   font-weight:normal;
 }
+
+.login-form, .signup-form{
+  margin-top:35px;
+  text-align:center;
+}
+
+.login-form input, .signup-form input{margin-top:8px;}
 
 .login-wrapper{
   margin:50px auto 0 auto;
@@ -166,9 +174,9 @@ nav a, nav a:visited{
 }
 
 button {
-  background-color: #225ca3;
+  background-color: #838072;
   border: 0;
-  padding: 1%;
+  padding: 12px 25px;
   color: white;
   font-weight: bold;
   transition: background-color .1s;
@@ -177,12 +185,7 @@ button {
 }
 
 button:hover {
-  background-color: #3486eb;
-}
-
-.post-list {
-  margin: 0;
-  padding: 0;
+  background-color: #706d5f
 }
 
 textarea, input {
