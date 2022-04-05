@@ -29,12 +29,31 @@ body{
 .mb15{margin-bottom:15px;}
 .mb20{margin-bottom:20px;}
 
-.bi-hand-thumbs-up-fill{
+.bi{
   color:rgb(143, 143, 143);
 }
-.bi-hand-thumbs-up-fill:hover{
+.bi:hover{
   color:rgb(107, 107, 107);
   cursor:pointer;
+}
+
+.bi-arrow-left-circle-fill, .bi-arrow-right-circle-fill{
+  font-size:40px;
+  margin-top:-10px;
+}
+
+.bi-arrow-right-circle-fill{
+  position:absolute;
+  height:100%;
+  top:40%;
+  right:10px;
+}
+
+.bi-arrow-left-circle-fill{
+  position:absolute;
+  height:100%;
+  top:40%;
+  left:10px;
 }
 
 main{
@@ -88,7 +107,7 @@ h1{
   /* max-width:1000px; */
   width:100%;
   border-radius:10px;
-  padding:50px 20px;
+  padding:50px 75px;
   background-color:#f0ede2;
   opacity:0.8;
   box-sizing:border-box;
@@ -96,6 +115,8 @@ h1{
   font-size:18px;
   font-weight:bold;
   color:var(--primary);
+  vertical-align:middle;
+  position:relative;
 }
 
 .topic-below{
