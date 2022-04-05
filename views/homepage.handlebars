@@ -3,14 +3,16 @@
 </div>
 
 <div class="topic-below">
-    <i class="bi bi-hand-thumbs-up-fill"></i> {{ topic.likes }} {{ format_plural "like" topic.likes }} | Posted on {{ format_date topic.created_at }}
+    <i class="bi bi-hand-thumbs-up-fill" title="I like this"></i> {{ topic.likes }} {{ format_plural "like" topic.likes }} | Posted on {{ format_date topic.created_at }}
 </div>
 
-<div class="textarea-wrapper">
-    <textarea></textarea>
-</div>
+<form class="comment-form">
+    <div class="comment-wrapper">
+        <textarea></textarea>
+    </div>
 
-<button class="mt10 btn-primary">Comment</button>
+    <button class="mt10 btn-primary">Comment</button>
+</form>
 
 {{#if topic}}
     <p>{{ topic.comments.length}} {{format_plural "comment" topic.comments.length}}</p>

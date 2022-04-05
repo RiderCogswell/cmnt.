@@ -5,7 +5,6 @@ const { Topic, User, Comment, Vote } = require('../models');
 
 // get all posts for homepage
 router.get('/', withAuth, (req, res) => {
-    console.log('======================');
     Topic.findAll({
       attributes: [
         'id',
@@ -35,7 +34,6 @@ router.get('/', withAuth, (req, res) => {
         let randomNumber = Math.floor(Math.random() * (max - 1 + 1)) + 1
         
         const topic = topics[randomNumber];
-        console.log(topic);
 
         if (!req.session.loggedIn) {
           res.render('login', {
@@ -43,7 +41,8 @@ router.get('/', withAuth, (req, res) => {
         }
         else{
           res.render('homepage', {
-            topic
+            topic,
+            loggedIn: req.session.loggedIn
           });
         }
        
@@ -110,11 +109,6 @@ router.get('/', withAuth, (req, res) => {
   });
 
   router.get('/signup', (req, res) => {
-    // if (req.session.loggedIn) {
-    //   res.redirect('/');
-    //   return;
-    // }
-  
     res.render('signup');
   });
 

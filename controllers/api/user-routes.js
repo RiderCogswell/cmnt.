@@ -56,7 +56,6 @@ router.get('/:id', withAuth, (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-    alert('entering login route')
     User.findOne({
         where: {
             username: req.body.username
