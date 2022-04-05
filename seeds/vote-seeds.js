@@ -94,10 +94,6 @@ const votedata = [
     topic_id: 5
   },
   {
-    user_id: 5,
-    topic_id: 16
-  },
-  {
     user_id: 6,
     topic_id: 17
   },
@@ -183,7 +179,7 @@ const votedata = [
   },
   {
     user_id: 8,
-    topic_id: 18
+    topic_id: 4
   },
   {
     user_id: 3,
