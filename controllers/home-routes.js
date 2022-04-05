@@ -4,7 +4,7 @@ const withAuth = require('../utils/auth');
 const { Topic, User, Comment, Vote } = require('../models');
 
 // get all posts for homepage
-router.get('/', (req, res) => {
+router.get('/', withAuth, (req, res) => {
     console.log('======================');
     Topic.findAll({
       attributes: [
@@ -20,18 +20,18 @@ router.get('/', (req, res) => {
           include: {
             model: User,
             attributes: ['username']
-          }
+          },
         },
         {
           model: User,
           attributes: ['username']
         }
-      ]
+      ],
     })
       .then(dbPostData => {
         const topics = dbPostData.map(topic => topic.get({ plain: true }));
 
-        let max = topics.length;
+        let max = topics.length-1;
         let randomNumber = Math.floor(Math.random() * (max - 1 + 1)) + 1
         
         const topic = topics[randomNumber];
@@ -107,6 +107,15 @@ router.get('/', (req, res) => {
     }
   
     res.render('login');
+  });
+
+  router.get('/signup', (req, res) => {
+    // if (req.session.loggedIn) {
+    //   res.redirect('/');
+    //   return;
+    // }
+  
+    res.render('signup');
   });
 
 module.exports = router;
