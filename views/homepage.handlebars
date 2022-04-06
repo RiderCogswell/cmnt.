@@ -8,7 +8,7 @@
 </div>
 
 <div class="topic-below">
-    <i class="bi bi-hand-thumbs-up-fill" title="I like this"></i> {{ topic.likes }} {{ format_plural "like" topic.likes }} | Posted on {{ format_date topic.created_at }}
+    <i class="bi bi-hand-thumbs-up-fill" id="upvote-btn" title="I like this"></i> {{ topic.likes }} {{ format_plural "like" topic.likes }} | Posted on {{ format_date topic.created_at }}
 </div>
 
 <form class="comment-form">
@@ -38,6 +38,7 @@
 {{/if}}
 
 <script src="/js/comment.js"></script>
+<script src="/js/upvote.js"></script>
 
 {{#if atZero}}
 <script src="/js/next-topic.js"></script>
