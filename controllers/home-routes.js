@@ -3,69 +3,66 @@ const sequelize = require('../config/connection');
 const withAuth = require('../utils/auth');
 const { Topic, User, Comment, Vote } = require('../models');
 
-// get all posts for homepage
 
-router.get('/', withAuth, (req, res) => {
-  // Add check for req.body.topic_id or something like that to pull up topics with ID's hidden to user
-  Topic.findAll({
-      attributes: [
-        'id',
-        'title',
-        'created_at',
-        [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE topic.id = vote.topic_id)'), 'likes']
-      ],
-      include: [
-        {
-          model: Comment,
-          attributes: ['id', 'comment_text', 'topic_id', 'user_id', 'created_at'],
-          include: {
-            model: User,
-            attributes: ['username']
-          },
-        },
-        {
-          model: User,
-          attributes: ['username']
-        }
-      ],
-    })
-    .then(dbPostData => {
-      const topics = dbPostData.map(topic => topic.get({ plain: true }));
+// Navigation prev/next
+router.post('/nav', withAuth, async (req, res) => {
+  console.log('---------------')
+  if(req.body.nav == 'prev'){
 
-      let max = topics.length - 1;
+    req.session.currentIndex -= 1;
+    if(req.session.currentIndex < 0){
+      req.session.currentIndex = 0;
+    }
+
+    res.set('Content-Type', 'text/html');
+    res.send(JSON.stringify(req.session.indexes[req.session.currentIndex]));
+  }
+
+  if(req.body.nav == 'next'){
+
+    if(req.session.currentIndex == (req.session.indexes.length - 1)){
+      console.log('already at the end');
+      const data = await Topic.findAll()
+      
+      let max = data.length;
       let randomNumber = Math.floor(Math.random() * (max - 1 + 1)) + 1
+      req.session.currentIndex += 1;
+      req.session.indexes.push(randomNumber);
       
-      const topic = topics[randomNumber];
-      
-      // req.session.topicsIndex.push(randomNumber);
+      res.set('Content-Type', 'text/html');
+      res.send(JSON.stringify(randomNumber));
+    }else{
+      req.session.currentIndex += 1;
 
-      if (!req.session.loggedIn) {
-        res.render('login', {
-        });
-      }
-      else{
-        res.render('homepage', {
-          topic,
-          loggedIn: req.session.loggedIn,
-          user_id: req.session.user_id
-        });
-        
-        // Update firstLogin to false
-        req.session.firstLogin = false;
+      res.set('Content-Type', 'text/html');
+      res.send(JSON.stringify(req.session.indexes[req.session.currentIndex]));
+    }
+  }
+})
 
-        // Save current index
-        req.session.currentIndex = randomNumber;
-      }
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+// Root landing - redirect to ID based route
+router.get('/', withAuth, async (req, res) => {
+    const data = await Topic.findAll()
+    
+    let max = data.length;
+    let randomNumber = Math.floor(Math.random() * (max - 1 + 1)) + 1
+    req.session.currentIndex = 0;
+    req.session.indexes = [];
+    req.session.indexes.push(randomNumber);
+
+    console.log(randomNumber);
+
+    //req.session.firstLogin = false;
+
+    res.redirect(`/topic/${randomNumber}`);
 });
   
-  // get single post
-router.get('/topic/:id', (req, res) => {
-  Topic.findOne({
+
+// Get single Topic by ID
+router.get('/topic/:id', async (req, res) => {
+  console.log('entering single topic route')
+  
+  const result = await Topic.findOne({
     where: {
       id: req.params.id
     },
@@ -78,36 +75,44 @@ router.get('/topic/:id', (req, res) => {
     include: [
       {
         model: Comment,
-        attributes: ['id', 'comment_text', 'topic_id', 'user_id'],
+        attributes: ['id', 'comment_text', 'topic_id', 'user_id', 'created_at'],
         include: {
           model: User,
           attributes: ['username']
-        }
+        },
       },
       {
         model: User,
         attributes: ['username']
       }
-    ]
+    ],
   })
-    .then(dbPostData => {
-      if (!dbPostData) {
-        res.status(404).json({ message: 'No post found with this id' });
-        return;
-      }
 
-      const topic = dbPostData.get({ plain: true });
+  const topic = result.get({ plain: true });
+  
+  // For passing into handlebars, position zero of prev/back array
+  let atZero;
 
-      res.render('single-topic', {
-        topic,
-        loggedIn: req.session.loggedIn
-      });
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
+  console.log(req.session.currentIndex);
+  if(req.session.currentIndex == 0){
+    atZero = true;
+  }else{
+    atZero = false;
+  }
+
+  if (!req.session.loggedIn) {
+    res.render('login', {
     });
-});
+  }
+  else{
+    res.render('homepage', {
+      topic,
+      loggedIn: req.session.loggedIn,
+      atZero: atZero,
+      user_id: req.session.user_id
+    });
+  }
+})
 
 router.get('/login', (req, res) => {
   if (req.session.loggedIn) {
