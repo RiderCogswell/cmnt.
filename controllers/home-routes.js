@@ -27,31 +27,42 @@ router.get('/', withAuth, (req, res) => {
         }
       ],
     })
-      .then(dbPostData => {
-        const topics = dbPostData.map(topic => topic.get({ plain: true }));
+    .then(dbPostData => {
+      const topics = dbPostData.map(topic => topic.get({ plain: true }));
 
-        let max = topics.length-1;
-        let randomNumber = Math.floor(Math.random() * (max - 1 + 1)) + 1
+      let max = topics.length-1;
+      let randomNumber = Math.floor(Math.random() * (max - 1 + 1)) + 1
+      
+      const topic = topics[randomNumber];
+      
+      // req.session.topicsIndex.push(randomNumber);
+
+      if (!req.session.loggedIn) {
+        res.render('login', {
+        });
+      }
+      else{
+        res.render('homepage', {
+          topic,
+          loggedIn: req.session.loggedIn
+        });
         
-        const topic = topics[randomNumber];
+        // Update firstLogin to false
+        req.session.firstLogin = false;
 
-        if (!req.session.loggedIn) {
-          res.render('login', {
-          });
-        }
-        else{
-          res.render('homepage', {
-            topic,
-            loggedIn: req.session.loggedIn
-          });
-        }
-       
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
-  });
+        // Save current index
+        req.session.currentIndex = randomNumber;
+
+        // Add a req.body to the get request maybe to pull up posts but keep the ID's hidden from user
+        // This will allow the same post to stay up until the user selects the next one
+      }
+      
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
   
   // get single post
   router.get('/topic/:id', (req, res) => {
