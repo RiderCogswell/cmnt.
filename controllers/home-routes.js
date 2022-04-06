@@ -4,8 +4,11 @@ const withAuth = require('../utils/auth');
 const { Topic, User, Comment, Vote } = require('../models');
 
 // get all posts for homepage
+
 router.get('/', withAuth, (req, res) => {
-    Topic.findAll({
+  // Add check for req.body.topic_id or something like that to pull up topics with ID's hidden to user
+  
+  Topic.findAll({
       attributes: [
         'id',
         'title',
@@ -52,9 +55,6 @@ router.get('/', withAuth, (req, res) => {
 
         // Save current index
         req.session.currentIndex = randomNumber;
-
-        // Add a req.body to the get request maybe to pull up posts but keep the ID's hidden from user
-        // This will allow the same post to stay up until the user selects the next one
       }
       
     })
