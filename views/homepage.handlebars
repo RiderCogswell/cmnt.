@@ -1,5 +1,8 @@
 <div class="topic-wrapper">
+    {{#if atZero}}
+    {{else}}
     <i class="bi bi-arrow-left-circle-fill" id="previousTopic" title="Previous Topic"></i>
+    {{/if}}
     {{ topic.title }} 
     <i class="bi bi-arrow-right-circle-fill" id="nextTopic" title="Next Topic"></i>
 </div>
@@ -12,12 +15,11 @@
     <div class="comment-wrapper">
         <textarea name="comment-body"></textarea>
     </div>
-    <div>
-        <input type="hidden"  id="topic_id" value="{{ topic.id }}">
-        <input type="hidden" id="user_id" value="{{ user_id }}">
-        <button type="submit" class="mt10 btn-primary">Comment</button>
-    </div>
-
+    
+    <input type="hidden"  id="topic_id" value="{{ topic.id }}">
+    <input type="hidden" id="user_id" value="{{ user_id }}">
+    
+    <button type="submit" class="mt10 btn-primary">Comment</button>
 </form>
 
 
@@ -36,4 +38,10 @@
 {{/if}}
 
 <script src="/js/comment.js"></script>
-<script src="/js/page-change.js"></script>
+
+{{#if atZero}}
+<script src="/js/next-topic.js"></script>
+{{else}}
+<script src="/js/prev-topic.js"></script>
+<script src="/js/next-topic.js"></script>
+{{/if}}

@@ -72,12 +72,14 @@ router.post('/login', (req, res) => {
             return;
         }
 
-        // Once the user successfully logs in, set up the sessions variable 'loggedIn'
+        // Once the user successfully logs in, set up the session variables
         req.session.save(() => {
             req.session.user_id = dbUserData.id;
             req.session.username = dbUserData.username;
             req.session.loggedIn = true;
             req.session.firstLogin = true;
+            req.session.currentIndex = 0;
+            req.session.indexes = [];
 
             res.status(200).json({ user: dbUserData, message: 'You are now logged in!' });
         });
@@ -117,7 +119,7 @@ router.post('/signup', (req, res) => {
     });
 });
 
-// UPDATE topic by id
+// Update user - not tested
 router.put('/:id', withAuth, (req, res) => {
     User.update(req.body, {
         individualHooks: true,
@@ -138,7 +140,7 @@ router.put('/:id', withAuth, (req, res) => {
     });
 });
 
-// DELETE topic
+// Delete user - not tested
 router.delete('/:id', withAuth, (req, res) => {
     User.destroy({
         where: {
