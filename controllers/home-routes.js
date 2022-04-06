@@ -7,7 +7,6 @@ const { Topic, User, Comment, Vote } = require('../models');
 
 router.get('/', withAuth, (req, res) => {
   // Add check for req.body.topic_id or something like that to pull up topics with ID's hidden to user
-  
   Topic.findAll({
       attributes: [
         'id',
@@ -47,7 +46,8 @@ router.get('/', withAuth, (req, res) => {
       else{
         res.render('homepage', {
           topic,
-          loggedIn: req.session.loggedIn
+          loggedIn: req.session.loggedIn,
+          user_id: req.session.user_id
         });
         
         // Update firstLogin to false
@@ -56,7 +56,6 @@ router.get('/', withAuth, (req, res) => {
         // Save current index
         req.session.currentIndex = randomNumber;
       }
-      
     })
     .catch(err => {
       console.log(err);

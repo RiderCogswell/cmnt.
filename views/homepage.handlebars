@@ -10,11 +10,16 @@
 
 <form class="comment-form">
     <div class="comment-wrapper">
-        <textarea></textarea>
+        <textarea name="comment-body"></textarea>
+    </div>
+    <div>
+        <input type="hidden"  id="topic_id" value="{{ topic.id }}">
+        <input type="hidden" id="user_id" value="{{ user_id }}">
+        <button type="submit" class="mt10 btn-primary">Comment</button>
     </div>
 
-    <button class="mt10 btn-primary">Comment</button>
 </form>
+
 
 {{#if topic}}
     <p>{{ topic.comments.length}} {{format_plural "comment" topic.comments.length}}</p>
@@ -29,4 +34,6 @@
     {{/each}}
     </ul>
 {{/if}}
+
+<script src="/js/comment.js"></script>
 <script src="/js/page-change.js"></script>
