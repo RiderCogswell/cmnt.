@@ -44,14 +44,12 @@ body{
 
 .bi-arrow-right-circle-fill{
   position:absolute;
-  height:100%;
   top:40%;
   right:10px;
 }
 
 .bi-arrow-left-circle-fill{
   position:absolute;
-  height:100%;
   top:40%;
   left:10px;
 }
