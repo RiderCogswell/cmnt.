@@ -276,10 +276,10 @@ form label {
   background-color: #ff643d;
 }
 
-.comment-form {
-  /* margin:20px 0 0 0; */
-}
-
+/* .comment-form {
+   margin:20px 0 0 0;  
+} */
+ 
 .comment-form textarea {
   padding: 1%;
   margin:0;
