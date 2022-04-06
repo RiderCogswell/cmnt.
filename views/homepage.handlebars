@@ -1,7 +1,7 @@
 <div class="topic-wrapper">
-    <i class="bi bi-arrow-left-circle-fill" title="Previous Topic"></i>
+    <i class="bi bi-arrow-left-circle-fill" id="previousTopic" title="Previous Topic"></i>
     {{ topic.title }} 
-    <i class="bi bi-arrow-right-circle-fill" title="Next Topic"></i>
+    <i class="bi bi-arrow-right-circle-fill" id="nextTopic" title="Next Topic"></i>
 </div>
 
 <div class="topic-below">
@@ -29,3 +29,4 @@
     {{/each}}
     </ul>
 {{/if}}
+<script src="/js/page-change.js"></script>
