@@ -1,3 +1,26 @@
+<h2 class="mt20">Dashboard</h2>
 
+<div class="mt20">
+    You have {{topics.length}} {{format_plural "topic" topics.length}}
+</div>
 
-<script src="/javascript/post.js"></script>
+<ul class="comment-list">
+    {{#each topics as | topic |}}
+    <li>
+        <a href="/topic/{{topic.id}}">{{ topic.title }}</a>
+        <p>Created {{ format_date created_at }}</p>
+    </li>
+    {{/each}}
+</ul>
+
+<form class="topic-form">
+    <div class="comment-wrapper">
+        <textarea name="topic-body"></textarea>
+    </div>
+
+    <input type="hidden" id="user_id" value="{{ user_id }}">
+    
+    <button type="submit" class="mt10 btn-primary">Post Topic</button>
+</form>
+
+<script src="/js/post.js"></script>
