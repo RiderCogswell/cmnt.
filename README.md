@@ -56,12 +56,12 @@ This project is covered under the [GNU General Public License v3.0](https://www.
 ## Contributing
 
 Project created by:
-- Brandon Balatbat
-- Elijah Johnson
-- Jon Mooney
-- Mark Protsyuk
-- Raymund Ofina
-- Rider Cogswell
+- [Brandon Balatbat](https://github.com/)
+- [Elijah Johnson](https://github.com/elijohnson565)
+- [Jon Mooney](https://github.com/JonMooney)
+- [Mark Protsyuk](https://github.com/MrProtsyuk)
+- [Raymund Ofina](https://github.com/Raymundofina)
+- [Rider Cogswell](https://github.com/RiderCogswell)
 
 If you wish to contribute to this project, follow these steps:
 
