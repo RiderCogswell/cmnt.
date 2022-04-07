@@ -45,9 +45,9 @@ It utilizes the following features:
 
 ### Screenshot:
 
-![Screenshot](./assets/images/screen1.jpg)
+![Screenshot](./public/images/screen1.jpg)
 
-![Screenshot](./assets/images/screen2.jpg)
+![Screenshot](./public/images/screen2.jpg)
 
 ## License
 

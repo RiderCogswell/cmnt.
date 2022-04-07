@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
 const withAuth = require('../utils/auth');
-const { Topic, User, Comment, Vote } = require('../models');
+const { Topic, User, Comment } = require('../models');
 
 
 // Navigation prev/next
