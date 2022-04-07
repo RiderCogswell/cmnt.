@@ -3,7 +3,7 @@
 
 ## Description
 
-Cmnt is a Node.js application that greets the user with a random topic that they can comment on. The app relies on randomness to get you out of your comfort zone to comment on things you might not comment on usually. You can click forward and back to get additional random topics. You can also post a topic from your dashboard.
+Cmnt is a Node.js application that greets the user with a random topic that they can comment on. The app relies on randomness to get you out of your comfort zone to comment on things you might not comment on usually. You can click forward and back to get additional random topics. You can also post a topic from your dashboard, and with no emails required, you can remain 100% anonymous!
 
 It utilizes the following features:
 - Node.js
