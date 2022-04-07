@@ -56,7 +56,7 @@ This project is covered under the [GNU General Public License v3.0](https://www.
 ## Contributing
 
 Project created by:
-- [Brandon Balatbat](https://github.com/)
+- [Brandon Balatbat](https://github.com/BBalatbat)
 - [Elijah Johnson](https://github.com/elijohnson565)
 - [Jon Mooney](https://github.com/JonMooney)
 - [Mark Protsyuk](https://github.com/MrProtsyuk)
