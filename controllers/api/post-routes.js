@@ -91,7 +91,6 @@ router.get('/edit/:id', withAuth, async (req, res) => {
 
 // CREATE new post
 router.post('/', withAuth, async (req, res) => {
-  console.log('entered route')
   try {
     const dbPost = await Topic.create({
       title: req.body.title,
