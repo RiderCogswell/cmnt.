@@ -42,7 +42,8 @@ router.get('/', withAuth, (req, res) => {
         res.render('dashboard', {
             topics,
             loggedIn: req.session.loggedIn,
-            user_id: req.session.user_id
+            user_id: req.session.user_id,
+            username: req.session.username
         })
     }
     })

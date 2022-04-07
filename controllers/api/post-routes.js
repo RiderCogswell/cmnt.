@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
-const { Post, User, Comment } = require('../../models');
+const { Topic, User, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 
@@ -91,10 +91,10 @@ router.get('/edit/:id', withAuth, async (req, res) => {
 
 // CREATE new post
 router.post('/', withAuth, async (req, res) => {
+  console.log('entered route')
   try {
-    const dbPost = await Post.create({
+    const dbPost = await Topic.create({
       title: req.body.title,
-      content: req.body.content,
       user_id: req.session.user_id
     });
 
@@ -108,7 +108,7 @@ router.post('/', withAuth, async (req, res) => {
 
 // Update post
 router.put('/:id', withAuth, (req, res) => {
-  Post.update(
+  Topic.update(
     {
       title: req.body.title,
       content: req.body.content
@@ -134,7 +134,7 @@ router.put('/:id', withAuth, (req, res) => {
 
 // Delete post
 router.delete('/:id', withAuth, (req, res) => {
-  Post.destroy({
+  Topic.destroy({
     where: {
       id: req.params.id
     }

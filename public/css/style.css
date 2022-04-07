@@ -258,6 +258,10 @@ form label {
   border-bottom:1px solid #e7e7e7;
 }
 
+.comment-list li a{
+  color:#3486eb;
+}
+
 .comment-list li p{
   margin:4px 0 0 0;
   padding:0;
