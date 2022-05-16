@@ -8,7 +8,7 @@ Cmnt is a Node.js application that greets the user with a random topic that they
 It utilizes the following features:
 - Node.js
 - Express.js
-- API
+- REST API
 - MySQL and Sequelize DB
 - Handlebars template engine
 - Fully deployed stand-alone application on Heroku
