@@ -36,5 +36,16 @@
   <script src="/js/logout.js"></script>
   {{/if}}
 </body>
-
+<script type="text/javascript">
+  (function() {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("/service-worker.js")
+        .then(() => console.log("Service Worker registered successfully."))
+        .catch(error =>
+          console.log("Service Worker registration failed:", error)
+        );
+    }
+  })();
+</script>
 </html>
