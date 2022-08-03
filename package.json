@@ -6,9 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "jest",
-    "seed": "node seeds",
-    "webpack": "webpack --watch",
-    "build": "webpack"
+    "seed": "node seeds"
   },
   "repository": {
     "type": "git",
@@ -35,9 +33,5 @@
     "mysql2": "^2.3.3",
     "sequelize": "^6.18.0",
     "standard-engine": "^14.0.1"
-  },
-  "devDependencies": {
-    "webpack": "^5.74.0",
-    "webpack-cli": "^4.10.0"
   }
 }
