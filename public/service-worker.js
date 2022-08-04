@@ -6,6 +6,10 @@ const DATA_CACHE_NAME = 'data-cache-' + VERSION;
 const FILES_TO_CACHE = [
   '/',
   './css/style.css',
+  './images/favicon.ico',
+  './images/like.png',
+  './images/screen1.png',
+  './images/screen2.png',
   './views/layouts/main.handlebars',
   './views/dashboard.handlebars',
   './views/homepage.handlebars',
