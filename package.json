@@ -21,7 +21,7 @@
   "homepage": "https://github.com/MrProtsyuk/cmnt.#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
-    "connect-session-sequelize": "^7.1.3",
+    "connect-session-sequelize": "^7.1.5",
     "debug": "^4.3.4",
     "dotenv": "^16.0.0",
     "exphbs": "^1.2.0",
