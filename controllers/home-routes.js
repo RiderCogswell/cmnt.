@@ -88,7 +88,7 @@ router.get('/topic/:id', async (req, res) => {
     ],
   })
 
-  const topic = result.get({ plain: true });
+  const topic = result.get({ plain: true }); // this is causing error
   
   // For passing into handlebars, position zero of prev/back array
   let atZero;
